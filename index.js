@@ -1,20 +1,21 @@
+const button = document.querySelector('.btn');
 
-let button = document.querySelector('.btn');
-let blueSquare = document.querySelector('.box');
-
-function myAnimation() {
-    let startPosition = 0;
-
-    let id = setInterval(frame, 10);
-    function frame() {
-        if (startPosition == 300) {
-            clearInterval(id);
-        } else {
-            startPosition++;
-            blueSquare.style.top = startPosition + 'px';
-            blueSquare.style.left = startPosition + 'px';
-        }
-    }
+function moveElement(element, position) {
+    element.style.top = position + 'px';
+    element.style.left = position + 'px';
 }
 
-button.addEventListener('click', myAnimation);
+function animate() {
+    let position = 0;
+    const blueSquare = document.querySelector('.box');
+    const id = setInterval(() => {
+        // никогда не используй ==, всегда ===
+        if (position === 300) {
+            clearInterval(id);
+        } else {
+            moveElement(blueSquare, position++);
+        }
+    }, 10);
+}
+
+button.addEventListener('click', animate);
